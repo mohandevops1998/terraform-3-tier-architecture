@@ -354,31 +354,4 @@ resource "aws_lb_listener" "external-elb" {
 
 
 
-output "lb_dns_name" {
-  description = "The DNS name of the load balancer"
-  value       = aws_lb.external-elb.dns_name
-}
 
-
-resource "aws_s3_bucket" "my_bucket" {
-  bucket = "batch4pmdevopswithaws123456"  
-  acl    = "private"  
-  versioning {
-    enabled = true 
-  }
-}
-
-resource "aws_iam_user" "one" {
-for_each = var.iam_users
-name = each.value
-}
-
-variable "iam_users" {
-description = ""
-type = set(string)
-default = ["user1", "user2", "user3", "user4"]
-}
-
-resource "aws_iam_group" "two" {
-name = "devopswithawsbyraham"
-}
